@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+</head>
+<body>
+<div id="hello">
+  HypemChart
+</div>
+<div id="hypemchart">
+</div>
+
+<script>
+  $(document).ready(function(){
+    $.ajax({
+      url: 'http://devmachine.com:80',
+      method: 'GET',
+      jsonpCallback: 'callback',
+      dataType: 'jsonp',
+      success: function(data){
+        new Morris.Bar({
+          element: 'hypemchart',
+          data: data,
+          xkey: 'title',
+          barColor: 'black',
+          ykeys: ['value'],
+          labels: ['Title'],
+          barColors: ['black'],
+          ymin: 1000,
+          ymax: 4000 
+          });
+    },
+      error: function(){
+        alert('Oops! An error was thrown.')
+      }
+    });
+  });
+</script>
+</body>
+</html>
